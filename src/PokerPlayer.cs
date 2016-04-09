@@ -37,7 +37,7 @@ namespace Nancy.Simple
 
 		    if (result.RaiseOdds > 0)
 		    {
-		        var raiseBase = Math.Max(gameState.Pot - gameState.Me().Bet, gameState.SmallBlind);
+		        var raiseBase = Math.Max(gameState.Pot - gameState.Me().Bet, gameState.MinimumRaise);
 		        return gameState.Me().Bet + (int)Math.Round(raiseBase * result.RaiseOdds);
 		    }
 		    if (result.CallOdds > 0)
