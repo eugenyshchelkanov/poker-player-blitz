@@ -31,7 +31,8 @@ namespace Nancy.Simple
 
         public Player Me()
         {
-            return Players[InAction];
+//            return Players[InAction];
+            return Players.First(s => s.WholeCards != null);
         }
 
         public bool IsAllin()

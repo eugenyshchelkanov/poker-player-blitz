@@ -4,7 +4,7 @@
     {
         public static LogicResult Result(GameState state)
         {
-            return Preflop.Result(state);
+            return Flop.Result(state);
         }
     }
 }
