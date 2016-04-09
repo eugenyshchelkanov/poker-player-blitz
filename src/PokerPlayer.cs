@@ -38,9 +38,12 @@ namespace Nancy.Simple
 		    if (gameState.CurrentBuyIn > result.BestBetInPots * gameState.Pot)
 		        return 0;
 
+		    var stavka = (int) (Math.Round(result.BestBetInPots)*gameState.Pot);
 
+		    if (stavka < gameState.SmallBlind)
+		        return gameState.SmallBlind;
 
-            return (int) (Math.Round(result.BestBetInPots) * gameState.Pot);
+            return stavka;
 		}
 
 		public static void ShowDown(JObject gameState)
