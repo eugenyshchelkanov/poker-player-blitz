@@ -20,13 +20,11 @@ namespace Nancy.Simple
         public List<Player> Players { get; set; }
 
         [JsonProperty("community_cards")]
-        public List<CommunityCard> CommunityCards { get; set; }
+        public List<Card> CommunityCards { get; set; }
 
         public List<Card> GetMyCards()
         {
-            return new List<Card>();
-            //return this.Players.FirstOrDefault(x=> x.)
-            return new List<Card>();
+            return Players.First(s => s.WholeCards != null).WholeCards;
         }
     }
 
