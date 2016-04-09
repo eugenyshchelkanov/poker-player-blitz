@@ -1,4 +1,5 @@
 ﻿using System;
+using Nancy.Simple.Logic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -10,9 +11,17 @@ namespace Nancy.Simple
 
 		public static int BetRequest(GameState gameState)
 		{
-		    var bestBet = isBet(gameState) * gameState.Pot;
+		    double bestBet = 0;
+		    if (gameState.CommunityCards.Count == 0)
+		        bestBet = Preflop.betInPots(gameState) * gameState.Pot;
+            if (gameState.CommunityCards.Count == 3)
+                bestBet = Flop.betInPots(gameState) * gameState.Pot;
+            if (gameState.CommunityCards.Count == 4)
+                bestBet = Turn.betInPots(gameState) * gameState.Pot;
+            if (gameState.CommunityCards.Count == 5)
+                bestBet = River.betInPots(gameState) * gameState.Pot;
 
-		    if (gameState.Me().Stack < bestBet)
+            if (gameState.Me().Stack < bestBet)
 		        return int.MaxValue;
 
 		    if (gameState.CurrentBuyIn > bestBet)
@@ -26,34 +35,6 @@ namespace Nancy.Simple
 		{
 			//TODO: Use this method to showdown
 		}
-
-        public static double isBet(GameState state)
-        {
-            var cards = state.GetMyCards();
-            var card1 = cards[0];
-            var card2 = cards[1];
-
-            if (card1.Rank == "A" && card2.Rank == "A")
-            {
-                return 10;
-            }
-            if (card1.Rank == "K" && card2.Rank == "K")
-            {
-                return 8;
-            }
-            if (card1.Rank == "Q" && card2.Rank == "Q")
-            {
-                return 6;
-            }
-
-            if (card1.Rank.Equals(card2.Rank))
-            {
-                return 5;
-            }
-
-
-            return 0;
-        }
 	}
 }
 
