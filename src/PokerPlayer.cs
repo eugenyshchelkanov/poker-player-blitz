@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Nancy.Simple
@@ -17,6 +18,7 @@ namespace Nancy.Simple
 		    if (gameState.CurrentBuyIn > bestBet)
 		        return 0;
 
+		    Console.WriteLine("State: " + JsonConvert.SerializeObject(gameState) + "; Bet: " + bestBet);
 		    return (int)bestBet;
 		}
 
