@@ -2,7 +2,7 @@
 
 namespace Nancy.Simple
 {
-	public static class PokerPlayer
+    public static class PokerPlayer
 	{
 		public static readonly string VERSION = "Blitz speed withod bounds!";
 
