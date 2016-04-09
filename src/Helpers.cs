@@ -31,10 +31,11 @@ namespace Nancy.Simple.Comb
         public static bool IsStraight(Card[] cards, int count)
         {
             var sortedRanks = cards
-               .Select(c => Helpers.GetPoinsByRank(c.Rank))
+               .Select(c => GetPoinsByRank(c.Rank))
                .OrderBy(x => x)
                .ToArray();
 
+            var maxCo = 0;
             var co = 0;
             for (int i = 0; i < sortedRanks.Length; i++)
             {
@@ -42,11 +43,15 @@ namespace Nancy.Simple.Comb
                         ? sortedRanks[i] != 2
                         : sortedRanks[i] != sortedRanks[i - 1] + 1))
                 {
+                    if (co > maxCo)
+                        maxCo = co;
                     co = 0;
                 }
                 co++;
             }
-            return co >= count;
+            if (co > maxCo)
+                maxCo = co;
+            return maxCo >= count;
         }
 
         public static bool IsStraight(Card[] cards)

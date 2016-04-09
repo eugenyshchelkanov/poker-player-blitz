@@ -61,6 +61,7 @@ namespace Nancy.Simple.Comb
             var result = new List<CombinationWithHighCard>();
 
             FindQuad(result, cards);
+            FindStraight(result, cards);
             FindFlash(result, cards);
             FindTrio(result, cards);
             FindTwoPairs(result, cards);
@@ -182,20 +183,46 @@ namespace Nancy.Simple.Comb
         private static void FindFlash(List<CombinationWithHighCard> result, Card[] cards)
         {
             var s1 = cards.Where(c => c.Suit == Suit.Clubs).ToArray();
-            if (s1.Length == 5)
+            if (s1.Length >= 5)
                result.Add(new CombinationWithHighCard(Combinations.Flash, s1));
 
             var s2 = cards.Where(c => c.Suit == Suit.Spades).ToArray();
-            if (s2.Length == 5)
+            if (s2.Length >= 5)
                 result.Add(new CombinationWithHighCard(Combinations.Flash, s2));
 
             var s3 = cards.Where(c => c.Suit == Suit.Hearts).ToArray();
-            if (s3.Length == 5)
+            if (s3.Length >= 5)
                 result.Add(new CombinationWithHighCard(Combinations.Flash, s3));
 
             var s4 = cards.Where(c => c.Suit == Suit.Diamonds).ToArray();
-            if (s4.Length == 5)
+            if (s4.Length >= 5)
                 result.Add(new CombinationWithHighCard(Combinations.Flash, s4));
+        }
+
+        private static void FindStraight(List<CombinationWithHighCard> result, Card[] cards)
+        {
+            //неверно, но стрит определим
+            if (Helpers.IsStraight(cards, 5))
+                result.Add(new CombinationWithHighCard(Combinations.Straight, cards));
+        }
+
+        private static void FindStraightFlash(List<CombinationWithHighCard> result, Card[] cards)
+        {
+            var s1 = cards.Where(c => c.Suit == Suit.Clubs).ToArray();
+            if (s1.Length >= 5 && Helpers.IsStraight(s1))
+                result.Add(new CombinationWithHighCard(Combinations.StraightFlash, s1));
+
+            var s2 = cards.Where(c => c.Suit == Suit.Spades).ToArray();
+            if (s2.Length >= 5 && Helpers.IsStraight(s2))
+                result.Add(new CombinationWithHighCard(Combinations.StraightFlash, s2));
+
+            var s3 = cards.Where(c => c.Suit == Suit.Hearts).ToArray();
+            if (s3.Length >= 5 && Helpers.IsStraight(s3))
+                result.Add(new CombinationWithHighCard(Combinations.StraightFlash, s3));
+
+            var s4 = cards.Where(c => c.Suit == Suit.Diamonds).ToArray();
+            if (s4.Length >= 5 && Helpers.IsStraight(s4))
+                result.Add(new CombinationWithHighCard(Combinations.StraightFlash, s4));
         }
     }
 }
