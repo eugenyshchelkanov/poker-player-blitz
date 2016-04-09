@@ -74,6 +74,7 @@
     <Compile Include="GameState.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="Logic\Flop.cs" />
+    <Compile Include="Logic\LogicResult.cs" />
     <Compile Include="Logic\Preflop.cs" />
     <Compile Include="Logic\River.cs" />
     <Compile Include="Logic\Turn.cs" />
