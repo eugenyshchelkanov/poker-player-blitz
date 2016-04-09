@@ -31,6 +31,16 @@
                 return 5;
             }
 
+            if (card1.Rank=="A" ||card1.Rank=="K" ||card1.Rank=="Q" ||card2.Rank=="A" ||card2.Rank=="K" || card2.Rank=="Q")
+            {
+                return 5;
+            }
+
+            if (card1.Suit.Equals(card2.Suit))
+            {
+                return 5;
+            }
+
             return 0;
         }
     }
