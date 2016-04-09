@@ -46,7 +46,7 @@ namespace Nancy.Simple
                 if (result.CallOdds > 0)
                 {
                     var toCall = gameState.CurrentBuyIn - gameState.Me().Bet;
-                    var odds = toCall / gameState.Pot;
+                    var odds = toCall / (gameState.Pot + 1);
                     if (result.CallOdds > odds)
                         return toCall;
                 }
