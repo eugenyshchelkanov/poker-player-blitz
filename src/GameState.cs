@@ -35,7 +35,7 @@ namespace Nancy.Simple
 
         public bool IsAllin()
         {
-            return CurrentBuyIn >= (Me().Stack - Me().Bet);
+            return CurrentBuyIn - Me().Bet >= Me().Stack;
         }
     }
 

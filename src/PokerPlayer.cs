@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System;
+using Newtonsoft.Json.Linq;
 
 namespace Nancy.Simple
 {
@@ -8,7 +9,15 @@ namespace Nancy.Simple
 
 		public static int BetRequest(GameState gameState)
 		{
-            return int.MaxValue;
+		    var bestBet = isBet(gameState) * gameState.Pot;
+
+		    if (gameState.Me().Stack < bestBet)
+		        return int.MaxValue;
+
+		    if (gameState.CurrentBuyIn > bestBet)
+		        return 0;
+
+		    return (int)bestBet;
 		}
 
 		public static void ShowDown(JObject gameState)
@@ -16,7 +25,7 @@ namespace Nancy.Simple
 			//TODO: Use this method to showdown
 		}
 
-        public static int isBet(GameState state)
+        public static double isBet(GameState state)
         {
             var cards = state.GetMyCards();
             var card1 = cards[0];
