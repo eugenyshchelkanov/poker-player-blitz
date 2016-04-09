@@ -70,6 +70,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AllinPlayer.cs" />
     <Compile Include="Combinator.cs" />
     <Compile Include="GameState.cs" />
     <Compile Include="Helpers.cs" />
