@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 
@@ -25,6 +26,16 @@ namespace Nancy.Simple
         public List<Card> GetMyCards()
         {
             return Players.First(s => s.WholeCards != null).WholeCards;
+        }
+
+        public Player Me()
+        {
+            return Players[InAction];
+        }
+
+        public bool IsAllin()
+        {
+            return CurrentBuyIn >= (Me().Stack - Me().Bet);
         }
     }
 
