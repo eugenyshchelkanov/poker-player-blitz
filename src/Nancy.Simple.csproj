@@ -70,9 +70,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Card.cs" />
-    <Compile Include="CardColor.cs" />
-    <Compile Include="CardType.cs" />
     <Compile Include="GameState.cs" />
     <Compile Include="MainModule.cs" />
     <Compile Include="App.cs" />

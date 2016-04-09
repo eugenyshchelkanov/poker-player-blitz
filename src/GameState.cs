@@ -41,7 +41,7 @@ namespace Nancy.Simple
         public List<Card> WholeCards { get; set; } 
     }
 
-    public class CommunityCard
+    public class Card
     {
         [JsonProperty("rank")]
         public string Rank { get; set; }
@@ -51,4 +51,5 @@ namespace Nancy.Simple
     }
 
     public enum Suit { Spades, Clubs, Hearts, Diamonds}
+
 }
