@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace Nancy.Simple
@@ -19,7 +20,13 @@ namespace Nancy.Simple
         public List<Player> Players { get; set; }
 
         [JsonProperty("community_cards")]
-        public List<Card> CommunityCards { get; set; } 
+        public List<CommunityCard> CommunityCards { get; set; }
+
+        public List<Card> GetMyCards()
+        {
+            return new List<Card>();
+            //return this.Players.FirstOrDefault(x=> x.)
+        }
     }
 
     public class Player
@@ -30,11 +37,9 @@ namespace Nancy.Simple
         public string Version { get; set; }
         public int Stack { get; set; }
         public int Bet { get; set; }
-        [JsonProperty("hole_cards")]
-        public List<Card> WholeCards { get; set; } 
     }
 
-    public class Card
+    public class CommunityCard
     {
         [JsonProperty("rank")]
         public string Rank { get; set; }
