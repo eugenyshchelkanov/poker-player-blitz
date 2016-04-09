@@ -26,17 +26,32 @@ namespace Nancy.Simple
 				switch (action) {
 				case "bet_request":
 				{
-					//var json = JObject.Parse (form ["game_state"]).;
-				    var state = JsonConvert.DeserializeObject<GameState>(form["game_state"]);
+				    try
+				    {
+				        var state = JsonConvert.DeserializeObject<GameState>(form["game_state"]);
 
-					var bet = PokerPlayer.BetRequest(state).ToString ();
-					var betBytes = Encoding.UTF8.GetBytes (bet);
-					var response = new Response {
-						ContentType = "text/plain",
-						Contents = s => s.Write (betBytes, 0, betBytes.Length),
-						StatusCode = HttpStatusCode.OK
-					};
-					return response;
+				        var bet = PokerPlayer.BetRequest(state).ToString();
+				        var betBytes = Encoding.UTF8.GetBytes(bet);
+				        var response = new Response
+				        {
+				            ContentType = "text/plain",
+				            Contents = s => s.Write(betBytes, 0, betBytes.Length),
+				            StatusCode = HttpStatusCode.OK
+				        };
+				        return response;
+				    }
+				    catch (Exception e)
+				    {
+				        Console.WriteLine(e);
+                                var betBytes = Encoding.UTF8.GetBytes("0");
+                                var response = new Response
+                                {
+                                    ContentType = "text/plain",
+                                    Contents = s => s.Write(betBytes, 0, betBytes.Length),
+                                    StatusCode = HttpStatusCode.OK
+                                };
+				        return response;
+				    }
 				}
 				case "showdown":
 				{
