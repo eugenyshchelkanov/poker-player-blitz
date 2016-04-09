@@ -46,7 +46,17 @@ namespace Nancy.Simple.Comb
 
     public class Combinator
     {
-        public CombinationWithHighCard[] Combinate(Card[] cards)
+        public static CombinationWithHighCard GetBest(Card[] cards)
+        {
+            var combinations = Combinate(cards);
+            var best = combinations
+                .OrderByDescending(c => c.Combination.Points)
+                .ThenByDescending(c => c.Priority)
+                .FirstOrDefault();
+            return best;
+        }
+
+        public static CombinationWithHighCard[] Combinate(Card[] cards)
         {
             var result = new List<CombinationWithHighCard>();
 
@@ -55,11 +65,21 @@ namespace Nancy.Simple.Comb
             FindTrio(result, cards);
             FindTwoPairs(result, cards);
             FindPair(result, cards);
+            FindOne(cards, result);
 
             return result.ToArray();
         }
 
-        private void FindPair(List<CombinationWithHighCard> result, Card[] cards)
+        private static void FindOne(Card[] cards, List<CombinationWithHighCard> result)
+        {
+            var highCard = cards
+                .OrderByDescending(c => Helpers.GetPoinsByRank(c.Rank))
+                .FirstOrDefault();
+            if (highCard != null)
+                result.Add(new CombinationWithHighCard(Combinations.One, highCard));
+        }
+
+        private static void FindPair(List<CombinationWithHighCard> result, Card[] cards)
         {
             for (int i = 0; i < cards.Length; i++)
             {
@@ -77,7 +97,7 @@ namespace Nancy.Simple.Comb
             }
         }
 
-        private void FindTrio(List<CombinationWithHighCard> result, Card[] cards)
+        private static void FindTrio(List<CombinationWithHighCard> result, Card[] cards)
         {
             for (int i = 0; i < cards.Length; i++)
             {
@@ -99,7 +119,7 @@ namespace Nancy.Simple.Comb
             }
         }
 
-        private void FindTwoPairs(List<CombinationWithHighCard> result, Card[] cards)
+        private static void FindTwoPairs(List<CombinationWithHighCard> result, Card[] cards)
         {
             for (int i = 0; i < cards.Length; i++)
             {
@@ -131,7 +151,7 @@ namespace Nancy.Simple.Comb
             }
         }
 
-        private void FindQuad(List<CombinationWithHighCard> result, Card[] cards)
+        private static void FindQuad(List<CombinationWithHighCard> result, Card[] cards)
         {
             for (int i = 0; i < cards.Length; i++)
             {
@@ -159,7 +179,7 @@ namespace Nancy.Simple.Comb
             }
         }
 
-        private void FindFlash(List<CombinationWithHighCard> result, Card[] cards)
+        private static void FindFlash(List<CombinationWithHighCard> result, Card[] cards)
         {
             var s1 = cards.Where(c => c.Suit == Suit.Clubs).ToArray();
             if (s1.Length == 5)
