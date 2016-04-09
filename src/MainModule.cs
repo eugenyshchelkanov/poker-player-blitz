@@ -26,8 +26,6 @@ namespace Nancy.Simple
 				switch (action) {
 				case "bet_request":
 				{
-				    try
-				    {
 				        var state = JsonConvert.DeserializeObject<GameState>(form["game_state"]);
 
 				        var bet = PokerPlayer.BetRequest(state).ToString();
@@ -39,21 +37,7 @@ namespace Nancy.Simple
 				            StatusCode = HttpStatusCode.OK
 				        };
 				        return response;
-				    }
-				    catch (Exception e)
-				    {
-				        Console.WriteLine(e.Message);
-                                Console.WriteLine(e.StackTrace);
-                                var betBytes = Encoding.UTF8.GetBytes("0");
-                                var response = new Response
-                                {
-                                    ContentType = "text/plain",
-                                    Contents = s => s.Write(betBytes, 0, betBytes.Length),
-                                    StatusCode = HttpStatusCode.OK
-                                };
-				        return response;
-				    }
-				}
+				    				}
 				case "showdown":
 				{
 					var json = JObject.Parse (form ["game_state"]);
