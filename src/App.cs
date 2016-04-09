@@ -1,5 +1,6 @@
 ﻿using System;
 using Nancy.Hosting.Self;
+using Newtonsoft.Json.Linq;
 
 namespace Nancy.Simple
 {

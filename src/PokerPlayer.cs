@@ -4,10 +4,12 @@ namespace Nancy.Simple
 {
 	public static class PokerPlayer
 	{
-		public static readonly string VERSION = "Default C# folding player";
+		public static readonly string VERSION = "Blitz speed withod bounds!";
 
 		public static int BetRequest(JObject gameState)
 		{
+		    GameState state = gameState.ToObject<GameState>();
+
             return int.MaxValue;
 		}
 
