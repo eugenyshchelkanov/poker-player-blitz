@@ -26,9 +26,9 @@ namespace Nancy.Simple
 				switch (action) {
 				case "bet_request":
 				{
-//				        var state = JsonConvert.DeserializeObject<GameState>(form["game_state"]);
+				        var state = JsonConvert.DeserializeObject<GameState>(form["game_state"]);
 
-				        var bet = AllinPlayer.BetRequest().ToString();
+				        var bet = FoldPlayer.BetRequest().ToString();
 				        var betBytes = Encoding.UTF8.GetBytes(bet);
 				        var response = new Response
 				        {
