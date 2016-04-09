@@ -52,10 +52,6 @@
     <StartupObject>Nancy.Simple.App</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=3.2.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.2.0\lib\net40\nunit.framework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="Nancy">
       <HintPath>..\lib\Nancy.dll</HintPath>
@@ -74,11 +70,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Combinator.cs" />
     <Compile Include="GameState.cs" />
+    <Compile Include="Helpers.cs" />
     <Compile Include="MainModule.cs" />
     <Compile Include="App.cs" />
     <Compile Include="PokerPlayer.cs" />
-    <Compile Include="PokerPlayerTest_PreflopAllin.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
@@ -90,9 +87,6 @@
     <Content Include="Views\ok">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
