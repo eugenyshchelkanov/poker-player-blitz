@@ -36,6 +36,9 @@ namespace Nancy.Simple
         public string Version { get; set; }
         public int Stack { get; set; }
         public int Bet { get; set; }
+
+        [JsonProperty("hole_cards")]
+        public List<Card> WholeCards { get; set; } 
     }
 
     public class CommunityCard
