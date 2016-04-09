@@ -11,24 +11,34 @@ namespace Nancy.Simple
 
 		public static int BetRequest(GameState gameState)
 		{
-		    double bestBet = 0;
+		    LogicResult result = null;
 		    if (gameState.CommunityCards.Count == 0)
-		        bestBet = Preflop.Result(gameState).BestBetInPots * gameState.Pot;
+                result = Preflop.Result(gameState);
             if (gameState.CommunityCards.Count == 3)
-                bestBet = Flop.Result(gameState).BestBetInPots * gameState.Pot;
+                result = Flop.Result(gameState);
             if (gameState.CommunityCards.Count == 4)
-                bestBet = Turn.Result(gameState).BestBetInPots * gameState.Pot;
+                result = Turn.Result(gameState);
             if (gameState.CommunityCards.Count == 5)
-                bestBet = River.Result(gameState).BestBetInPots * gameState.Pot;
+                result = River.Result(gameState);
 
-            if (gameState.Me().Stack < bestBet)
+		    if (result == null)
+		    {
+		        Console.WriteLine("RESULT IS NULL");
+		        return 0;
+		    }
+
+            Console.WriteLine("State: " + JsonConvert.SerializeObject(gameState) + "; Bet: " + result.BestBetInPots * gameState.Pot);
+
+            if (gameState.IsAllin() && result.CanRespondToAllIn)
+                return int.MaxValue;
+
+            if (gameState.Me().Stack < result.BestBetInPots * gameState.Pot)
 		        return int.MaxValue;
 
-		    if (gameState.CurrentBuyIn > bestBet)
+		    if (gameState.CurrentBuyIn > result.BestBetInPots * gameState.Pot)
 		        return 0;
 
-		    Console.WriteLine("State: " + JsonConvert.SerializeObject(gameState) + "; Bet: " + bestBet);
-		    return (int)bestBet;
+		    return (int)result.BestBetInPots * gameState.Pot;
 		}
 
 		public static void ShowDown(JObject gameState)
