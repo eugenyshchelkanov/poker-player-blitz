@@ -4,7 +4,7 @@
     {
         public static int BetRequest()
         {
-            return int.MaxValue;
+            return 0;
         }
     }
 }

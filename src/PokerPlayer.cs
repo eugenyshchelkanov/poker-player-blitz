@@ -8,7 +8,7 @@ namespace Nancy.Simple
 {
     public static class PokerPlayer
 	{
-		public static readonly string VERSION = "Blitz speed withod bounds!";
+		public static readonly string VERSION = "Blitz speed withod bounds! v0";
 
 		public static int BetRequest(GameState gameState)
 		{
