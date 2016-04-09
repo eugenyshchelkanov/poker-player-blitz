@@ -17,6 +17,7 @@ namespace Nancy.Simple
         public int MinimumRaise { get; set; }
         public int Dealer { get; set; }
         public int Orbits { get; set; }
+        [JsonProperty("in_action")]
         public int InAction { get; set; }
         public List<Player> Players { get; set; }
 

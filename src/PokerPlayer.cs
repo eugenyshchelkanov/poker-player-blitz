@@ -27,23 +27,27 @@ namespace Nancy.Simple
 		        return 0;
 		    }
 
-            Console.WriteLine("State: " + JsonConvert.SerializeObject(gameState) + "; Bet: " + result.BestBetInPots * gameState.Pot);
+		    if (gameState.IsAllin())
+		    {
+		        if (result.CanRespondToAllIn)
+		            return int.MaxValue;
+		        else
+                    return 0;
+		    }
 
-            if (gameState.IsAllin() && result.CanRespondToAllIn)
-                return int.MaxValue;
-
-            if (gameState.Me().Stack < result.BestBetInPots * gameState.Pot)
-		        return int.MaxValue;
-
-		    if (gameState.CurrentBuyIn > result.BestBetInPots * gameState.Pot)
-		        return 0;
-
-		    var stavka = (int) (Math.Round(result.BestBetInPots)*gameState.Pot);
-
-		    if (stavka < gameState.SmallBlind)
-		        return gameState.SmallBlind;
-
-            return stavka;
+		    if (result.RaiseOdds > 0)
+		    {
+		        var raiseBase = Math.Max(gameState.Pot - gameState.Me().Bet, gameState.MinimumRaise);
+		        return gameState.Me().Bet + (int)Math.Round(raiseBase * result.RaiseOdds);
+		    }
+		    if (result.CallOdds > 0)
+		    {
+		        var toCall = gameState.CurrentBuyIn - gameState.Me().Bet;
+		        var odds = toCall / gameState.Pot;
+                if (result.CallOdds > odds)
+                    return toCall;
+		    }
+		    return 0;
 		}
 
 		public static void ShowDown(JObject gameState)
