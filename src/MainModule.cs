@@ -1,6 +1,8 @@
 using System;
 using Newtonsoft.Json.Linq;
 using System.Text;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Nancy.Simple
 {
@@ -24,8 +26,10 @@ namespace Nancy.Simple
 				switch (action) {
 				case "bet_request":
 				{
-					var json = JObject.Parse (form ["game_state"]);
-					var bet = PokerPlayer.BetRequest (json).ToString ();
+					//var json = JObject.Parse (form ["game_state"]).;
+				    var state = JsonConvert.DeserializeObject<GameState>(form["game_state"]);
+
+					var bet = PokerPlayer.BetRequest(state).ToString ();
 					var betBytes = Encoding.UTF8.GetBytes (bet);
 					var response = new Response {
 						ContentType = "text/plain",
