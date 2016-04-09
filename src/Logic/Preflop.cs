@@ -26,6 +26,11 @@
                 return 5;
             }
 
+            if (card1.Suit.Equals(card2.Suit))
+            {
+                return 5;
+            }
+
             return 0;
         }
     }
