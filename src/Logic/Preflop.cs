@@ -10,46 +10,41 @@
 
             if (card1.Rank == "A" && card2.Rank == "A")
             {
-                return new LogicResult() { BestBetInPots = 1, CanRespondToAllIn = true };
+                return new LogicResult() { RaiseOdds = 1, CallOdds = 1, CanRespondToAllIn = true };
             }
             if (card1.Rank == "A" && card2.Rank == "K" && card1.Suit == card2.Suit)
             {
-                return new LogicResult() { BestBetInPots = 1, CanRespondToAllIn = true };
+                return new LogicResult() { RaiseOdds = 1, CallOdds = 1, CanRespondToAllIn = true };
             }
             if (card1.Rank == "K" && card2.Rank == "K")
             {
-                return new LogicResult() { BestBetInPots = 1, CanRespondToAllIn = true };
+                return new LogicResult() { RaiseOdds = 1, CallOdds = 1, CanRespondToAllIn = true };
             }
             if (card1.Rank == "Q" && card2.Rank == "Q")
             {
-                return new LogicResult() { BestBetInPots = 1, CanRespondToAllIn = true };
+                return new LogicResult() { RaiseOdds = 1, CallOdds = 1, CanRespondToAllIn = true };
             }
             if (card1.Rank == "J" && card2.Rank == "J")
             {
-                return new LogicResult() { BestBetInPots = 1, CanRespondToAllIn = true };
+                return new LogicResult() { RaiseOdds = 1, CallOdds = 1, CanRespondToAllIn = true };
             }
 
             if (card1.Rank.Equals(card2.Rank))
             {
-                return new LogicResult() { BestBetInPots = 0.5, CanRespondToAllIn = false };
+                return new LogicResult() { RaiseOdds = 0, CallOdds = 1, CanRespondToAllIn = false };
             }
 
             if (card1.Suit.Equals(card2.Suit))
             {
-                return new LogicResult() { BestBetInPots = 0.25, CanRespondToAllIn = false };
+                return new LogicResult() { RaiseOdds = 0, CallOdds = 1, CanRespondToAllIn = false };
             }
 
             if (card1.Rank == "A" || card1.Rank == "K" || card1.Rank == "Q" || card2.Rank == "A" || card2.Rank == "K" || card2.Rank == "Q")
             {
-                return new LogicResult() { BestBetInPots = 0.25, CanRespondToAllIn = false };
+                return new LogicResult() { RaiseOdds = 0, CallOdds = 1, CanRespondToAllIn = false };
             }
 
-            if (card1.Suit.Equals(card2.Suit))
-            {
-                return new LogicResult() { BestBetInPots = 0.25, CanRespondToAllIn = false };
-            }
-
-            return new LogicResult() { BestBetInPots = 0, CanRespondToAllIn = false };
+            return new LogicResult() { RaiseOdds = 0, CallOdds = 0, CanRespondToAllIn = false };
         }
     }
 }
