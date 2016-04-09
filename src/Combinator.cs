@@ -27,14 +27,7 @@ namespace Nancy.Simple.Comb
         {
             Combination = combination;
             Cards = cards;
-            Priority = GetHigh(cards);
-        }
-
-        private static int GetHigh(Card[] cards)
-        {
-            if (cards.Length == 0)
-                return 0;
-            return cards.Select(c => Helpers.GetPoinsByRank(c.Rank)).Max();
+            Priority = Helpers.GetHigh(cards);
         }
     }
 
