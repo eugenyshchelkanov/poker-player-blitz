@@ -36,7 +36,7 @@ namespace Nancy.Simple
 
 		static void Main (string[] args)
 		{
-			Host = new NancyHost (CurrentAddress);
+		    Host = new NancyHost (CurrentAddress);
 			Host.Start ();
 			Console.WriteLine ("Nancy is started and listening on {0}...", CurrentAddress);
 			while (Console.ReadLine () != "quit");
