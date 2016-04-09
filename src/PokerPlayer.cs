@@ -13,13 +13,13 @@ namespace Nancy.Simple
 		{
 		    double bestBet = 0;
 		    if (gameState.CommunityCards.Count == 0)
-		        bestBet = Preflop.betInPots(gameState) * gameState.Pot;
+		        bestBet = Preflop.Result(gameState).BestBetInPots * gameState.Pot;
             if (gameState.CommunityCards.Count == 3)
-                bestBet = Flop.betInPots(gameState) * gameState.Pot;
+                bestBet = Flop.Result(gameState).BestBetInPots * gameState.Pot;
             if (gameState.CommunityCards.Count == 4)
-                bestBet = Turn.betInPots(gameState) * gameState.Pot;
+                bestBet = Turn.Result(gameState).BestBetInPots * gameState.Pot;
             if (gameState.CommunityCards.Count == 5)
-                bestBet = River.betInPots(gameState) * gameState.Pot;
+                bestBet = River.Result(gameState).BestBetInPots * gameState.Pot;
 
             if (gameState.Me().Stack < bestBet)
 		        return int.MaxValue;
