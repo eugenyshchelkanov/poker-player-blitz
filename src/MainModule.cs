@@ -42,7 +42,8 @@ namespace Nancy.Simple
 				    }
 				    catch (Exception e)
 				    {
-				        Console.WriteLine(e);
+				        Console.WriteLine(e.Message);
+                                Console.WriteLine(e.StackTrace);
                                 var betBytes = Encoding.UTF8.GetBytes("0");
                                 var response = new Response
                                 {
