@@ -26,6 +26,7 @@ namespace Nancy.Simple
         {
             return new List<Card>();
             //return this.Players.FirstOrDefault(x=> x.)
+            return new List<Card>();
         }
     }
 
