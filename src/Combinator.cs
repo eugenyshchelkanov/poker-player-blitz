@@ -60,6 +60,8 @@ namespace Nancy.Simple.Comb
         {
             var result = new List<CombinationWithHighCard>();
 
+            FindFullHouse(result, cards);
+            FindStraightFlash(result, cards);
             FindQuad(result, cards);
             FindStraight(result, cards);
             FindFlash(result, cards);
@@ -223,6 +225,18 @@ namespace Nancy.Simple.Comb
             var s4 = cards.Where(c => c.Suit == Suit.Diamonds).ToArray();
             if (s4.Length >= 5 && Helpers.IsStraight(s4))
                 result.Add(new CombinationWithHighCard(Combinations.StraightFlash, s4));
+        }
+
+        private static void FindFullHouse(List<CombinationWithHighCard> result, Card[] cards)
+        {
+            //неверно, но фуллхаус определим
+            var gs = cards.GroupBy(g => g.Rank);
+            var groups3 = gs.Count(g => g.Count() >= 3);
+            var groups2 = gs.Count(g => g.Count() >= 2);
+            if (groups2 >= 2 && groups3 >= 1)
+            {
+                result.Add(new CombinationWithHighCard(Combinations.FullHouse, cards));
+            }
         }
     }
 }
